@@ -1,6 +1,6 @@
 import random 
 print("Welcome to Themed Headline Generator v2.0")
-def themed_headline_generator(theme):
+def themed_headline_generator():
     themes = {
         "space": {
             "subjects": ["The astronaut", "A spaceship", "The alien", "The planet", "The star"],
@@ -68,25 +68,30 @@ def themed_headline_generator(theme):
             "object": ["the ecosystem", "clean energy", "sustainability", "the wildlife", "environmental policies"]
         }}
     theme_list = list(themes.keys())
-    selected_theme = None
+
+    print("\nAvailable Themes:")
+    for i, theme in enumerate(theme_list):#enamerate starts counting from 0
+        print(f"  {i} - {theme}")#display the themes with their index numbers
+
     while True:
-        theme_input = input(f"Choose a theme ({', '.join(theme_list)} or number 0-{len(theme_list)-1}): ").strip().lower()
+        theme_input = input("\nChoose a theme by name or number: ").strip().lower()#strip() removes any leading or trailing whitespace, lower() converts input to lowercase
+         # Check if the input is a valid theme name or index
         if theme_input in themes:
             selected_theme = theme_input
-            print(f"Generating headline for theme: {selected_theme}")
+            print(f"\nGenerating headline for theme: {selected_theme}")
             break
         elif theme_input.isdigit() and 0 <= int(theme_input) < len(theme_list):
             selected_theme = theme_list[int(theme_input)]
-            print(f"Generating headline for theme: {selected_theme}")
+            print(f"\nGenerating headline for theme: {selected_theme}")
             break
         print("Invalid theme. Please try again.")
+
     subject = random.choice(themes[selected_theme]["subjects"])
     verb = random.choice(themes[selected_theme]["verbs"])
     obj = random.choice(themes[selected_theme]["object"])
     headline = f"{subject} {verb} {obj}."
     return headline
 
+
 # Example usage
-# Convert number to theme
-# You can change the theme to any of the available ones
-# We have updated the file name, and we are to add its version.
+print("\n📰 " + themed_headline_generator())
