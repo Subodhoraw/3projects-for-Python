@@ -35,8 +35,16 @@ TIME_CONTEXT_MODIFIERS = {
     "FUTURE":["tomorrow", "next year", "in the future", "upcoming", "soon"]}
 class HeadlineGenerator:
     """Generates themed headlines with sentiment and time context modifiers."""
-    def __init__(self,keywords="",sentiment ="neutral", time_context ="present", theme ="space"):
-        
+    def __init__(self,keywords="",sentiment ="neutral", time_context ="present", theme ="none"):
+        self.keywords = keywords.lower().strip() #KEYWORDS
+        self.sentiment = sentiment.lower() #SENTIMENT
+        self.time_context = time_context.lower() #time context
+        self.theme = theme
+        self.confidence_score = 0.0
+    
+
+    
+
 
 #TIME CONTEXT MODIFIERS
 
