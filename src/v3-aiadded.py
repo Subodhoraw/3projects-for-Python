@@ -1,7 +1,8 @@
 import random
+from datetime import datetime
 print("Welcome to Themed Headline Generator v3.0 with AI Additions")
-def themed_headline_generator():
-    themes = {
+
+Themes = {
         "space": {
             "subjects": ["The astronaut", "A spaceship", "The alien", "The planet", "The star"],
             "verbs": ["explores", "lands on", "discovers", "orbits", "communicates with"],
@@ -23,6 +24,23 @@ def themed_headline_generator():
             "objects": ["a vast empire", "new lands", "ancient wisdom", "a powerful kingdom", "historic monuments"]
         }
     }
+
+SENTIMENT_VERBS = {
+    "POSITIVE":["celebrates", "embraces", "achieves", "excels in", "thrives in"],
+    "NEGATIVE":["struggles with", "fails in", "collapses under", "declines in", "battles against"],
+    "NEUTRAL":["observes", "analyzes", "reports on", "discusses", "examines"]}
+TIME_CONTEXT_MODIFIERS = {
+    "PAST":["yesterday", "last year", "a decade ago", "in the past", "previously"],
+    "PRESENT":["today", "this year", "currently", "nowadays", "at present"],
+    "FUTURE":["tomorrow", "next year", "in the future", "upcoming", "soon"]}
+class HeadlineGenerator:
+    """Generates themed headlines with sentiment and time context modifiers."""
+    def __init__(self,keywords="",sentiment ="neutral", time_context ="present", theme ="space"):
+        
+
+#TIME CONTEXT MODIFIERS
+
+
 
     theme_list = list(themes.keys())
 
