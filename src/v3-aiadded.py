@@ -41,6 +41,26 @@ class HeadlineGenerator:
         self.time_context = time_context.lower() #time context
         self.theme = theme
         self.confidence_score = 0.0
+    def validate_inputs(self):
+       """Check if inputs are valid"""
+       if self.sentiment not in SENTIMENT_VERBS:
+        self.sentiment = "Neutral"
+       if self.time_context not in TIME_CONTEXT_MODIFIERS:
+        self.time_context = "present"
+        return True
+    def get_context_details(self):
+       """Return all context information"""
+       return{
+          "keywords": self.keywords,
+          "sentiment":self.sentiment,
+          "time_context" :self.time_context,
+          "theme": self.theme,
+          "confidence":self.confidence_score
+       }
+    
+
+       
+
     
 
     
@@ -50,20 +70,4 @@ class HeadlineGenerator:
 
 
 
-    theme_list = list(themes.keys())
-
-    print("\nAvailable Themes:")
-    for i, theme in enumerate(theme_list):
-        print(f"  {i} - {theme}")
-
-    while True:
-        theme_input = input("\nChoose a theme by name or number: ").strip().lower()
-        if theme_input in themes:
-            selected_theme = theme_input
-            print(f"\nGenerating headline for theme: {selected_theme}")
-            break
-        elif theme_input.isdigit() and 0 <= int(theme_input) < len(theme_list):
-            selected_theme = theme_list[int(theme_input)]
-            print(f"\nGenerating headline for theme: {selected_theme}")
-            break
-        print("Invalid theme. Please try again.")
+    
