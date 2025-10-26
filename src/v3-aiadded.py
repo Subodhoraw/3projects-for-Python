@@ -57,9 +57,67 @@ class HeadlineGenerator:
           "theme": self.theme,
           "confidence":self.confidence_score
        }
-    
 
-       
+#matcher class
+class ContextMatcher:
+   """PSEUDO CODE:
+    ─────────────
+    CLASS ContextMatcher:
+        METHOD match_keyword_to_theme(keyword):
+            FOR each theme IN themes:
+                score = 0
+                FOR each theme_keyword IN theme.keywords:
+                    IF keyword IN theme_keyword OR theme_keyword IN keyword:
+                        score += 1
+                IF score > 0:
+                    ADD (theme, score) TO matches
+            
+            RETURN theme with highest score
+    """
+   def match_keyword_theme(keyword):
+      """ find the best theme for the given keyword"""
+      if not keyword:
+         return random.choice(list(Themes.keys))
+      score = {}
+      for theme_name, theme_data in Themes.items():
+         scores = 0
+         keywords = theme_data["keywords"]
+
+         #check keywords matches 
+         for tkeyword in keywords:
+             if keyword in tkeyword or  tkeyword in keyword:
+                score += 2 #direct match get higher score 
+             elif keyword[0:3] in tkeyword :
+                score += 1         
+         if score  > 0:
+            score[theme_name] = score 
+        #return theme with highest score,or random if no match
+      if scores:
+         best_theme = max(scores, key=scores.get)
+         confidence = score[best_theme] /10.0
+         return best_theme,min(confidence,1.0)
+      return random.choice(list(Themes.keys())),0.5
+   @staticmethod 
+   def select_components(context):
+      """PSEUDO CODE:
+        ─────────────
+        METHOD select_components(context):
+            theme = context.theme
+            sentiment = context.sentiment
+            
+            // Subject selection: Random from theme
+            subject = RANDOM_CHOICE(theme.subjects)
+            
+            // Verb selection: Based on sentiment
+            verb_pool = SENTIMENT_VERBS[sentiment]
+            verb = RANDOM_CHOICE(verb_pool)
+            
+            // Object selection: Prefer ones matching keyword
+            object = RANDOM_CHOICE(theme.objects)
+            
+            RETURN (subject, verb, object)
+           """
+      
 
     
 
