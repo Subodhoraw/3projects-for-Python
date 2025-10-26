@@ -117,7 +117,15 @@ class ContextMatcher:
             
             RETURN (subject, verb, object)
            """
-      
+      theme_data = Themes[context.theme]
+      #select subject (random from theme)
+      subject = random.choice(theme_data["subjects"])
+
+      #Select verbs based on sentiment 
+      sentiment_verbs =SENTIMENT_VERBS.get(context.sentiment, SENTIMENT_VERBS["neutral"])
+      available_verbs = sentiment_verbs + theme_data["verbs"]
+      verb = random.choice(available_verbs)
+      #
 
     
 
